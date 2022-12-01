@@ -11,6 +11,8 @@ def dfFlatIndex(df, resetIndex=True, sep='.'):
     | sep : str, default '.'
     |   When combining the indicies determines the separator
     """
-    df.columns([f'{i}{sep}{j}' for i,j in df.columns])
     df.reset_index(inplace=resetIndex)
+    cols = [f'{i}{sep}{j}' for i,j in df.columns]
+    df.columns = df.columns.to_flat_index()
+    df.columns = cols
     return df
