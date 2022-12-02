@@ -12,7 +12,9 @@ def dfFlatIndex(df, resetIndex=True, sep='.'):
     |   When combining the indicies determines the separator
     """
     df.reset_index(inplace=resetIndex)
-    cols = [f'{i}{sep}{j}' for i,j in df.columns]
+    cols = []
+    for i,j in df.columns:
+        cols.append(f'{i}{sep}{j}' if j != '' else f'{i}')
     df.columns = df.columns.to_flat_index()
     df.columns = cols
     return df
